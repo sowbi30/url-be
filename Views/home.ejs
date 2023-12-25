@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Url Shortner</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+
+<body style="background: url('https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3Y1NDZiYXRjaDMtbXludC0zMS1iYWRnZXdhdGVyY29sb3JfMS5qcGc.jpg'); background-size: cover;">
+    <div class="container">
+        <div class="row">
+            <div class="card text-center" style="width: 60rem;height: 3rem;border-bottom: 3rem;border-radius: 5rem;">
+                <div class="card " style="width: 60rem;height: 3rem;border-bottom: 3rem;border-radius: 5rem;">
+                    <div class="card-header justify-content-center align-items-center" style="width: 60rem; border-bottom: 3rem;border-radius: 5rem;">
+                        <h3 style="color: brown;">URL SHORTNER</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form action="/create" method="POST">
+            <div class="row">
+                <div class="input-group mb-3" style="margin-top: 3rem;width: 60rem; height: 3rem;border-bottom: 3rem;border-radius: 5rem;">
+                    <input type="text" name="longUrl" class="form-control" placeholder="paste your long URL"
+                        aria-label="Recipient's username" aria-describedby="button-addon2" style="background-color: rgba(181, 168, 149, 0.5);height: 3rem;border-bottom: 3rem; border-radius: 5rem;">
+                    <div class="input-group-append">
+                        <input class="btn btn-outline-secondary" type="submit" value="submit" style="background-color: rgba(250, 239, 223, 0.562);height: 3rem;border-bottom: 3rem;color: brown;  border-radius: 5rem;"
+                            id="button-addon2"></input>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+                    <!-- Table to display URL count -->
+            <table class="table table-bordered"  style="width:60rem;height: 3rem;border: 2px; border-bottom: 3rem;border-radius:5rem">
+                <thead style="color: chocolate;">
+                    <tr>
+                        <th>Total URLs</th>
+                        <td style="font-weight: bolder;"><%= urlResult.length %></td>
+                    </tr>
+                </thead>
+            </table>
+        <!-- cards -->
+        <div class="row">
+            <% for (let i=0; i < urlResult.length; i++) { %>
+                <div class="col-lg-3">
+                    <div class="card text-white bg-light  mb-3" style="max-width: 18rem;">
+                        <div class="card-header" style="color: burlywood; font-weight: bolder;">Total Click: <%= urlResult[i].clickCount %></div>
+                       
+                        <div class="card-body">
+                            <p class="card-text" style="color: chocolate;text-decoration: underline;font-weight: bold">  Short Url :   <br></p>
+
+                            <h6 class="card-title" style="color: burlywood;">
+                                <a style="color: burlywood;" href="http://localhost:8000/<%= urlResult[i].shortUrl %>"
+                                    target="_blank"> http://localhost:8000/<%= urlResult[i].shortUrl %></a>
+                            </h6>
+                            <p class="card-text" style="color: chocolate;text-decoration: underline;font-weight: bold"> Long Url :  <br></p>
+                            <p class="card-text" style="color: rgba(205, 180, 148, 0.689)">
+                                <%= urlResult[i].longUrl %>
+                            </p>
+                            
+                            <a href="/delete/<%= urlResult[i].id %>" class="btn btn-sm btn-secondary">Remove</a>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+        </div>
+    </div>
+</body>
+
+</html>
