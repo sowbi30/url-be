@@ -10,6 +10,7 @@ const { UrlModel } = require('./models/urlshort');
 const crypto = require('crypto')
 app.use(cors());
 app.use(express.json());
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 const JWT_SECRET =
