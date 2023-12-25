@@ -10,18 +10,16 @@ const { UrlModel } = require('./models/urlshort');
 const crypto = require('crypto')
 app.use(cors());
 app.use(express.json());
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 const JWT_SECRET =
   "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
 
-const mongoUrl =
-  "mongodb+srv://sowbaranika:sowbaranika@cluster0.pa7sucz.mongodb.net/?retryWrites=true&w=majority";
+  const mongoUrl = 'mongodb://localhost:27017/myUrlShortner';
+  mongoose.connect(mongoUrl);
+  
 
-  mongoose.connect('mongodb://localhost:27017/myUrlShortner');
-
-require("./models/userDetails");
+  require("./models/userDetails");
 
 const User = mongoose.model('UserInfo');
 
@@ -90,8 +88,10 @@ app.post("/userData", async (req, res) => {
         const userData = await User.findOne({ email: useremail }).populate('urls');
 
         // Assuming you have a property named UserInfo in the userData object
-        res.render('home.ejs', { UserInfo: userData.UserInfo, urlResult: userData.urls, data: userData });
-    } catch (error) { 
+        const userInfo = await UserInfo.find().exec();
+        res.render('home.ejs', {
+            UserInfo: userInfo
+        });    } catch (error) { 
         console.error(error);
         res.send({ status: "error", data: error });
     }
@@ -250,17 +250,6 @@ app.get('/', async function (req, res) {
     }
 });
 
-app.get('/', async function (req, res) {
-    try {
-        const userInfo = await UserInfo.find().exec();
-        res.render('home.ejs', {
-            UserInfo: info
-        });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ success: false, error: 'Internal Server Error' });
-    }
-});
 
 app.post('/create', async function (req, res) {
     // create a short url
