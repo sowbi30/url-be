@@ -158,7 +158,7 @@ app.post("/forgot-password", async (req, res) => {
     }
 });
  // Reset password form rendering route
-app.get("/reset-password/:id/:token", async (req, res) => {
+app.get("/reset-password/:token/:id", async (req, res) => {
     const { id, token } = req.params;
     console.log(req.params);
     const oldUser = await User.findOne({ _id: id });
@@ -176,7 +176,7 @@ app.get("/reset-password/:id/:token", async (req, res) => {
 });
 
 // Handling reset password form submission
-app.post("/reset-password/:id/:token", async (req, res) => {
+app.post("/reset-password/:token/:id", async (req, res) => {
     const { id, token } = req.params;
     const { password } = req.body;
 
