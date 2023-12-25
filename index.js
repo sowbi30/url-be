@@ -139,7 +139,7 @@ app.post("/forgot-password", async (req, res) => {
             to: oldUser.email,
             subject: "Password Reset",
             text: link,
-            html: `http://localhost:3000/reset-password?token=${randomBytesToken}&id=${oldUser._id}`,
+            html: `https://url-fe.netlify.app/reset-password?token=${randomBytesToken}&id=${oldUser._id}`,
         };
 
         // Use 'transport' 
