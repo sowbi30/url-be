@@ -12,12 +12,8 @@ app.use(cors());
 app.use(express.json());
 
 
-const JWT_SECRET =
-  "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
-
-  const mongoUrl = 'mongodb://127.0.0.1:27017/myUrlShortner';
-  mongoose.connect(mongoUrl);
-  
+ JWT_SECRET = process.env.JWT_SECRET 
+  mongoUrl = process.env.mongoUrl
 
   require("./models/userDetails");
 
